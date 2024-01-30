@@ -41,6 +41,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "faraday"
   gem "figaro"
+  gem "pry"
   gem "rack-cors"
   gem "rspec-rails"
   gem "simplecov"
