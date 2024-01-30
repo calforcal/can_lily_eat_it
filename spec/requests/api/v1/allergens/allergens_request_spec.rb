@@ -6,7 +6,7 @@ RSpec.describe "Allergens API" do
       it "can get the information for a certain UPC code" do
         get api_v1_allergens_path(upc: "014500021632")
 
-        expect(response).to be_successful
+        expect(response).to be_successful 
         parsed = JSON.parse(response.body, symbolize_names: true)
   
         expect(parsed).to have_key(:data)

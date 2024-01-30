@@ -5,7 +5,7 @@ RSpec.describe AllergensFacade do
     describe "allergens_query" do
       it "returns information about a specific grocery item" do
         upc_code = "014500021632"
-        allergen = AllergensFacade.new.allergens_query(upc_code)
+        allergen = AllergensFacade.new.get_allergen_by_upc(upc_code)
 
         expect(allergen).to be_an Allergen
 
