@@ -83,7 +83,6 @@ class Allergen
       "kyodofu" => true,
       "natto" => true,
       "autolyzed yeast" => true,
-      "calcium caseinate" => true,
       "carob" => true,
       "gelatin" => true,
       "lecithin" => true,
