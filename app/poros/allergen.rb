@@ -145,14 +145,16 @@ class Allergen
     if ingr[-1][-1] == "."
       ingr[-1].chop!
     end
-    ingr
+    ingr.map do |arr|
+      arr.split(" ").map { |word| word.capitalize }.join(" ")
+    end
   end
 
   def parse_allergens(details)
     found_allergens = []
     split_ingredients(details).each do |list|
       list.split(" ").each do |ingredient|
-        if known_allergens[ingredient]
+        if known_allergens[ingredient.downcase]
           found_allergens << list
           next
         end
