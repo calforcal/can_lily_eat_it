@@ -1,7 +1,7 @@
 class Allergen
   attr_reader :name, :allergens, :ingredients, :lily_eat
   def initialize(details)
-    @name = details[:title]
+    @name = capitalize_name(details[:title])
     @allergens = parse_allergens(details)
     @ingredients = split_ingredients(details)
     @lily_eat = can_lily_eat?(details)
@@ -138,6 +138,10 @@ class Allergen
       "soy protein isolate" => true,
       "edamame" => true
     }
+  end
+
+  def capitalize_name(name)
+    name.split(" ").map { |word| word.capitalize }.join(" ")
   end
 
   def split_ingredients(details)
