@@ -101,7 +101,7 @@ RSpec.describe Allergen do
 
     allergen = Allergen.new(attrs)
 
-    expect(allergen.name).to eq("Seasoned asian medley")
+    expect(allergen.name).to eq("Seasoned Asian Medley")
     expect(allergen.ingredients).to eq(["Carrots", "Broccoli", "Baby Cob Corn", "Sugar Snap Peas", "2% Or Less: Soybean Oil", "Salt", "Sugar", "Natural Flavor", "Dehydrated Onion", "Dehydrated Garlic", "Spice"])
     expect(allergen.allergens).to eq(["2% Or Less: Soybean Oil"])
     expect(allergen.lily_eat).to eq(false)
