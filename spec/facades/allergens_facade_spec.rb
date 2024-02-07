@@ -10,8 +10,8 @@ RSpec.describe AllergensFacade do
         expect(allergen).to be_an Allergen
 
         expect(allergen.name).to eq("Seasoned asian medley")
-        expect(allergen.ingredients).to eq(["Carrots", "broccoli", "baby cob corn", "sugar snap peas", "2% or less: soybean oil", "salt", "sugar", "natural flavor", "dehydrated onion", "dehydrated garlic", "spice"])
-        expect(allergen.allergens).to eq(["2% or less: soybean oil"])
+        expect(allergen.ingredients).to eq(["Carrots", "Broccoli", "Baby Cob Corn", "Sugar Snap Peas", "2% Or Less: Soybean Oil", "Salt", "Sugar", "Natural Flavor", "Dehydrated Onion", "Dehydrated Garlic", "Spice"])
+        expect(allergen.allergens).to eq(["2% Or Less: Soybean Oil"])
         expect(allergen.lily_eat).to eq(false)
       end
     end
