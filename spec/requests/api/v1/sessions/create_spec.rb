@@ -3,18 +3,12 @@ require "rails_helper"
 RSpec.describe "#create_session" do
   describe "#happy paths" do
     it "can start a sesssion based on a users information / email" do
-      user_info = {
-        "name": "Mickey",
-        "email": "crazy_unique_email@gmail.com",
-        "password": "mickey123",
-        "password_confirmation": "mickey123"
-      }
-
-      post api_v1_users_path(user_info)
+      created_user = User.create!(name: "mickey", email: "crazy_unique_email@gmail.com", password: "mickey123", password_confirmation: "mickey123")
 
       json_body = {
-        "name": "Mickey",
-        "email": "crazy_unique_email@gmail.com"
+        "name": "mickey",
+        "email": "crazy_unique_email@gmail.com",
+        "password": "mickey123"
       }
 
       post api_v1_sessions_path(json_body)
@@ -34,7 +28,7 @@ RSpec.describe "#create_session" do
       expect(user).to have_key(:attributes)
 
       expect(user[:attributes]).to have_key(:name)
-      expect(user[:attributes][:name]).to eq("Mickey")
+      expect(user[:attributes][:name]).to eq("mickey")
       expect(user[:attributes]).to have_key(:email)
       expect(user[:attributes][:email]).to eq("crazy_unique_email@gmail.com")
     end
