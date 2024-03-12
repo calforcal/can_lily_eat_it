@@ -28,9 +28,9 @@ RSpec.describe "Users API" do
         expect(user).to have_key(:attributes)
 
         expect(user[:attributes]).to have_key(:name)
-        expect(user[:name]).to eq("Mickey")
+        expect(user[:attributes][:name]).to eq("Mickey")
         expect(user[:attributes]).to have_key(:email)
-        expect(user[:email]).to eq("mickey@gmail.com")
+        expect(user[:attributes][:email]).to eq("mickey@gmail.com")
       end
     end
   end
