@@ -6,4 +6,10 @@ RSpec.describe User, :model do
     it { should have_secure_password :password }
     it { should validate_uniqueness_of :email }
   end
+
+
+  describe "#associations" do
+    it { should have_many :user_foods }
+    it { should have_many(:foods).through(:user_foods) }
+  end
 end
