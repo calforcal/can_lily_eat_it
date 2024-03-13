@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       resources :allergens, only: %i[index show]
       resources :users, only: %i[create]
       resources :sessions, only: %i[create destroy]
+
+      get "/logged_in", to: "sessions#show"
     end
   end
 end
