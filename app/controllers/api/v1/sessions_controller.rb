@@ -14,6 +14,7 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def destroy
-
+    session.delete :user_id
+    render json: { message: "You have been successfully logged out." }
   end
 end
