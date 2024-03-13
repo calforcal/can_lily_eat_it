@@ -8,9 +8,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :allergens, only: %i[index show]
       resources :users, only: %i[create]
-      resources :sessions, only: %i[create destroy]
+      resources :sessions, only: %i[create]
 
       get "/logged_in", to: "sessions#show"
+      delete "/logout", to: "sessions#destroy"
     end
   end
 end
