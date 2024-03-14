@@ -1,7 +1,8 @@
 class Allergen
-  attr_reader :name, :allergens, :ingredients, :lily_eat
-  def initialize(details)
+  attr_reader :name, :upc_code, :allergens, :ingredients, :lily_eat
+  def initialize(details, upc_code)
     @name = capitalize_name(details[:title])
+    @upc_code = upc_code
     @allergens = parse_allergens(details)
     @ingredients = split_ingredients(details)
     @lily_eat = can_lily_eat?(details)
