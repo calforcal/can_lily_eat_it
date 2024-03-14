@@ -13,7 +13,27 @@ RSpec.describe "DELETE User Food" do
         delete api_v1_user_food_path(user.id, food_1.id)
 
         expect(response).to be_successful
-        expect(response.status).to eq(204)
+        expect(response.status).to eq(200)
+
+        parsed = JSON.parse(response.body, symbolize_names: true)
+
+        foods = parsed[:data]
+        expect(foods).to be_an Array
+        
+        foods.each do |food|
+          expect(food).to be_a Hash
+          expect(food).to have_key(:id)
+          expect(food).to have_key(:type)
+          expect(food[:type]).to eq("food")
+          expect(food).to have_key(:attributes)
+          expect(food[:attributes]).to be_a Hash
+
+          expect(food[:attributes]).to have_key(:name)
+          expect(food[:attributes]).to have_key(:upc_code)
+          expect(food[:attributes]).to have_key(:ingredients)
+          expect(food[:attributes]).to have_key(:allergens)
+          expect(food[:attributes]).to have_key(:lily_eat)
+        end
 
         expect(user.foods.count).to eq(1)
       end
