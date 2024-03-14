@@ -26,25 +26,22 @@ RSpec.describe "POST User Food" do
 
         parsed = JSON.parse(response.body, symbolize_names: true)
 
-        foods = parsed[:data]
-        expect(foods).to be_an Array
-        
-        foods.each do |food|
-          expect(food).to be_a Hash
-          expect(food).to have_key(:id)
-          expect(food).to have_key(:type)
-          expect(food[:type]).to eq("food")
-          expect(food).to have_key(:attributes)
-          expect(food[:attributes]).to be_a Hash
+        food = parsed[:data]
 
-          expect(food[:attributes]).to have_key(:name)
-          expect(food[:attributes]).to have_key(:upc_code)
-          expect(food[:attributes]).to have_key(:ingredients)
-          expect(food[:attributes]).to have_key(:allergens)
-          expect(food[:attributes]).to have_key(:lily_eat)
-        end
+        expect(food).to be_a Hash
+        expect(food).to have_key(:id)
+        expect(food).to have_key(:type)
+        expect(food[:type]).to eq("food")
+        expect(food).to have_key(:attributes)
+        expect(food[:attributes]).to be_a Hash
 
-        expect(foods.length).to eq(3)
+        expect(food[:attributes]).to have_key(:name)
+        expect(food[:attributes]).to have_key(:upc_code)
+        expect(food[:attributes]).to have_key(:ingredients)
+        expect(food[:attributes]).to have_key(:allergens)
+        expect(food[:attributes]).to have_key(:lily_eat)
+
+        expect(user.foods.length).to eq(3)
       end
     end
   end
