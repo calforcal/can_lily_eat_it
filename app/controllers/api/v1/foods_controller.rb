@@ -10,6 +10,14 @@ class Api::V1::FoodsController < ApplicationController
     render json: FoodSerializer.new.serialize_one_food(new_food), status: :created
   end
 
+  def destroy
+    food = Food.find(params[:id])
+    user_food = UserFood.find_by_user_and_food_id(@user.id, food.id)
+    user_food.delete
+    food.delete
+    render json: { "message": "Record successfully deleted" }, status: 204
+  end
+
   private
   def get_user
     @user = User.find(params[:user_id])
