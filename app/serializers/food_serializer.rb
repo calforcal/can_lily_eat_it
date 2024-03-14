@@ -9,6 +9,7 @@ class FoodSerializer
         "type": "food",
         "attributes": {
           "name": food.name,
+          "upc_code": food.upc_code,
           "allergens": food.allergens,
           "ingredients": food.ingredients,
           "lily_eat": food.lily_eat
