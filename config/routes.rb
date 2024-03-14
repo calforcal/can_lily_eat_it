@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :allergens, only: %i[index show]
-      resources :users, only: %i[create show]
+      resources :users, only: %i[create show] do
+        resources :foods, only: %i[index]
+      end
       resources :sessions, only: %i[create]
 
       get "/logged_in", to: "sessions#show"
