@@ -20,7 +20,10 @@ RSpec.describe "Allergens API" do
         attributes = food_item[:attributes]
   
         expect(attributes).to have_key(:name)
-        expect(attributes[:name]).to be_a String 
+        expect(attributes[:name]).to be_a String
+
+        expect(attributes).to have_key(:upc_code)
+        expect(attributes[:upc_code]).to be_a String 
   
         expect(attributes).to have_key(:ingredients)
         expect(attributes[:ingredients]).to be_an Array
