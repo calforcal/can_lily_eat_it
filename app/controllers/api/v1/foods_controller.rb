@@ -15,7 +15,7 @@ class Api::V1::FoodsController < ApplicationController
     user_food = UserFood.find_by_user_and_food_id(@user.id, food.id)
     user_food.delete
     food.delete
-    render json: { "message": "Record successfully deleted" }, status: 204
+    render json: FoodSerializer.new.serialize_all_foods(@user.foods), status: :ok
   end
 
   private
