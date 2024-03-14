@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :allergens, only: %i[index show]
       resources :users, only: %i[create show] do
-        resources :foods, only: %i[index create]
+        resources :foods, only: %i[index create destroy]
       end
       resources :sessions, only: %i[create]
 
