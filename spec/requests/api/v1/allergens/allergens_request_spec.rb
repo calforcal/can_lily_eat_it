@@ -14,7 +14,7 @@ RSpec.describe "Allergens API" do
         food_item = parsed[:data]
   
         expect(food_item).to have_key(:type)
-        expect(food_item[:type]).to eq("item")
+        expect(food_item[:type]).to eq("food")
         expect(food_item).to have_key(:attributes)
   
         attributes = food_item[:attributes]
