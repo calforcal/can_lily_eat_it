@@ -4,10 +4,9 @@ class FoodSerializer
   end
 
   def serialize_one_food(food)
-    if food.id != nil
+    if food.id == nil
       {
         "data": {
-          "id": food.id,
           "type": "food",
           "attributes": {
             "name": food.name,
@@ -21,6 +20,7 @@ class FoodSerializer
     else
       {
         "data": {
+          "id": food.id,
           "type": "food",
           "attributes": {
             "name": food.name,
