@@ -14,7 +14,7 @@ RSpec.describe "Users Foods" do
         parsed = JSON.parse(response.body, symbolize_names: true)
 
         foods = parsed[:data]
-        expect(foods).to be_an array
+        expect(foods).to be_an Array
         
         foods.each do |food|
           expect(food).to be_a Hash
