@@ -35,5 +35,14 @@ RSpec.describe "Allergens API" do
         expect(attributes[:lily_eat]).to be(true).or be(false)
       end
     end
+
+    describe "#sad paths" do
+      it "can handle a bad UPC code request" do
+        get api_v1_allergens_path(upc: "10987654321")
+
+        expect(response).to be_successful
+        expect(response.status).to eq(204)
+      end
+    end
   end
 end
