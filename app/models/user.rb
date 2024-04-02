@@ -5,4 +5,6 @@ class User < ApplicationRecord
 
   has_many :user_foods
   has_many :foods, through: :user_foods
+  has_many :user_allergens
+  has_many :allergens, through: :user_allergens
 end
