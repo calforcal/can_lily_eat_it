@@ -11,5 +11,7 @@ RSpec.describe User, :model do
   describe "#associations" do
     it { should have_many :user_foods }
     it { should have_many(:foods).through(:user_foods) }
+    it { should have_many :user_allergens }
+    it { should have_many(:allergens).through(:user_allergens) }
   end
 end
