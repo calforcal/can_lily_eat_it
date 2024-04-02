@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_13_142141) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_02_145007) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "allergens", force: :cascade do |t|
+    t.string "name"
+    t.jsonb "found_in", default: "{}", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "foods", force: :cascade do |t|
     t.string "name"
@@ -22,6 +29,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_13_142141) do
     t.boolean "lily_eat"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_allergens", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "allergen_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["allergen_id"], name: "index_user_allergens_on_allergen_id"
+    t.index ["user_id"], name: "index_user_allergens_on_user_id"
   end
 
   create_table "user_foods", force: :cascade do |t|
@@ -41,6 +57,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_13_142141) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "user_allergens", "allergens"
+  add_foreign_key "user_allergens", "users"
   add_foreign_key "user_foods", "foods"
   add_foreign_key "user_foods", "users"
 end
