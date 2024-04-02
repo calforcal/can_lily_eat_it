@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Allergen do
+RSpec.describe UpcItem do
   it "exists" do
     attrs = {
       "added_time": "2022-09-07 01:57:53",
@@ -99,12 +99,12 @@ RSpec.describe Allergen do
       }
     }
 
-    allergen = Allergen.new(attrs, "014500021632")
+    item = UpcItem.new(attrs, "014500021632")
 
-    expect(allergen.name).to eq("Seasoned Asian Medley")
-    expect(allergen.upc_code).to eq("014500021632")
-    expect(allergen.ingredients).to eq(["Carrots", "Broccoli", "Baby Cob Corn", "Sugar Snap Peas", "2% Or Less: Soybean Oil", "Salt", "Sugar", "Natural Flavor", "Dehydrated Onion", "Dehydrated Garlic", "Spice"])
-    expect(allergen.allergens).to eq(["2% Or Less: Soybean Oil"])
-    expect(allergen.lily_eat).to eq(false)
+    expect(item.name).to eq("Seasoned Asian Medley")
+    expect(item.upc_code).to eq("014500021632")
+    expect(item.ingredients).to eq(["Carrots", "Broccoli", "Baby Cob Corn", "Sugar Snap Peas", "2% Or Less: Soybean Oil", "Salt", "Sugar", "Natural Flavor", "Dehydrated Onion", "Dehydrated Garlic", "Spice"])
+    expect(item.allergens).to eq(["2% Or Less: Soybean Oil"])
+    expect(item.lily_eat).to eq(false)
   end
 end

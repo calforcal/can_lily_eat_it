@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe "Allergens API" do
-  describe "#get allergen information" do
+RSpec.describe "Upc Items API" do
+  describe "#get item information" do
     describe "happy paths" do
       it "can get the information for a certain UPC code" do
-        get api_v1_allergens_path(upc: "014500021632")
+        get api_v1_upc_items_path(upc: "014500021632")
 
         expect(response).to be_successful 
         parsed = JSON.parse(response.body, symbolize_names: true)
@@ -38,7 +38,7 @@ RSpec.describe "Allergens API" do
 
     describe "#sad paths" do
       it "can handle a bad UPC code request" do
-        get api_v1_allergens_path(upc: "10987654321")
+        get api_v1_upc_items_path(upc: "10987654321")
 
         expect(response).to be_successful
         expect(response.status).to eq(204)

@@ -1,16 +1,16 @@
-class AllergensFacade
-  def get_allergen_by_upc(upc)
-    details = service.get_allergen_info(upc)
+class UpcItemsFacade
+  def get_item_by_upc(upc)
+    details = service.get_item_info(upc)
     if details[:success] == false
       {
         "message": "Not Found. No product could be found with that code."
       }
     else
-      Allergen.new(details, upc)
+      UpcItem.new(details, upc)
     end
   end
 
   def service
-    AllergensService.new
+    UpcItemsService.new
   end
 end

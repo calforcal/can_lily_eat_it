@@ -1,4 +1,4 @@
-class Allergen
+class UpcItem
   attr_reader :id, :name, :upc_code, :allergens, :ingredients, :lily_eat
   def initialize(details, upc_code)
     @id = nil

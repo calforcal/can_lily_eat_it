@@ -1,5 +1,5 @@
-class AllergensService
-  def get_allergen_info(upc)
+class UpcItemsService
+  def get_item_info(upc)
     response = conn.get("/product/#{upc}")
     JSON.parse(response.body, symbolize_names: true)
   end
