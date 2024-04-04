@@ -399,8 +399,11 @@ wheat_hash = {
   "plant-based meat" => true
 }
 
+UserAllergen.destroy_all
 Allergen.destroy_all
+User.destroy_all
 
+user = User.create(name: "mickey", email: "rooster@gmail.com", password: "buddy123", password_confirmation: "buddy123")
 dairy = Allergen.create(name: "dairy", found_in: dairy_hash)
 soy = Allergen.create(name: "soy", found_in: soy_hash)
 egg = Allergen.create(name: "egg", found_in: egg_hash)
