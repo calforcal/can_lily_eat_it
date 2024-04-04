@@ -17,11 +17,8 @@ RSpec.describe User, :model do
 
   describe "#Instance Method" do
     describe "#get_user_allergens" do
-      user = User.create!(name: "mickey", email: "rooster@gmail.com", password: "buddy123", password_confirmation: "buddy123")
-      dairy = Allergen.find(1)
-      soy = Allergen.find(2)
-      dairy_allergy = user.user_allergens.create!(allergen: dairy)
-      soy_allergy = user.user_allergens.create!(allergen: soy)
+      # user = User.create(name: "mickey", email: "rooster@gmail.com", password: "buddy123", password_confirmation: "buddy123")
+      user = User.find_by(email: "rooster@gmail.com")
 
       it "can return a combined list of all of the ingredients users allergens are found in" do
         expect(user.get_user_allergens).to eq(
