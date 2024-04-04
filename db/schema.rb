@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_145007) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["allergen_id"], name: "index_user_allergens_on_allergen_id"
+    t.index ["user_id", "allergen_id"], name: "index_user_allergens_on_user_id_and_allergen_id", unique: true
     t.index ["user_id"], name: "index_user_allergens_on_user_id"
   end
 

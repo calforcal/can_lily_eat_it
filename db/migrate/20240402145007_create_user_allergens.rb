@@ -6,5 +6,8 @@ class CreateUserAllergens < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    add_index :user_allergens, [:user_id, :allergen_id], unique: true
+
   end
 end
