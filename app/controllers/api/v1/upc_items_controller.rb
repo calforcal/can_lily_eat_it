@@ -4,7 +4,7 @@ class Api::V1::UpcItemsController < ApplicationController
       allergens = @current_user.get_user_allergens
     else
       merged_allergens = {}
-      params[:allergens].each { |allergen| merged_allergens.merge!(Allergen.find_by(name: allergen).found_in) }
+      params[:allergens].split(",").each { |allergen| merged_allergens.merge!(Allergen.find_by(name: allergen).found_in) }
       allergens = merged_allergens
     end
 

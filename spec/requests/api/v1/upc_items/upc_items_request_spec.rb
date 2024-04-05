@@ -4,7 +4,7 @@ RSpec.describe "Upc Items API" do
   describe "#get item information" do
     describe "happy paths" do
       it "can get the information for a certain UPC code and given allergens" do
-        allergens = ["dairy", "soy"]
+        allergens = "dairy,soy"
         get api_v1_upc_items_path(upc: "014500021632", allergens: allergens)
 
         expect(response).to be_successful 
