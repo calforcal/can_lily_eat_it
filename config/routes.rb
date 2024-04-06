@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :upc_items, only: %i[index show]
       resources :users, only: %i[create show] do
         resources :allergens, only: %i[create]
+        patch "/allergens", to: "allergens#update"
         resources :foods, only: %i[index create destroy]
       end
       resources :sessions, only: %i[create]
