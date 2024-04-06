@@ -37,7 +37,6 @@ RSpec.describe "Upc Items API" do
       end
 
       it "can get the information for a certain UPC code and USERS allergens" do
-        allergens = ["dairy", "soy"]
         post api_v1_sessions_path(email: "rooster@gmail.com", password: "buddy123")
         get api_v1_upc_items_path(upc: "014500021632")
 
@@ -73,7 +72,7 @@ RSpec.describe "Upc Items API" do
 
     describe "#sad paths" do
       it "can handle a bad UPC code request " do
-        allergens = ["dairy", "soy"]
+        allergens = "dairy,soy"
         get api_v1_upc_items_path(upc: "10987654321", allergens: allergens)
 
         expect(response).to be_successful
