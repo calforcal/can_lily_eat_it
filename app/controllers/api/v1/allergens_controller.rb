@@ -1,17 +1,31 @@
 class Api::V1::AllergensController < ApplicationController
   before_action :get_user
+  def index
+    render json: AllergenSerializer.new.serialize_user_allergens(@user.allergens)
+  end
+
   def create
     if @user.allergens.count == 0
       params[:allergens].split(",").each do |allergen|
         found_allergen = Allergen.find_by(name: allergen)
         UserAllergen.create!(user_id: @user.id, allergen_id: found_allergen.id)
       end
+      code = 201
+    else
+      locate_and_update_allergens
+      code = 200
     end
 
-    render json: { message: "Your selections have been saved." }, status: 201
+    render json: { message: "Your selections have been saved." }, status: code
   end
 
   def update
+    locate_and_update_allergens
+
+    render json: { message: "Your selections have been saved." }, status: 200
+  end
+
+  def locate_and_update_allergens
     allergen_hash = {
       "dairy" => false,
       "soy" => false,
@@ -35,8 +49,6 @@ class Api::V1::AllergensController < ApplicationController
         UserAllergen.find_by(user_id: @user.id, allergen_id: found_allergen.id).destroy
       end
     end
-
-    render json: { message: "Your selections have been saved." }, status: 200
   end
 
   private
