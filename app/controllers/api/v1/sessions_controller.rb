@@ -10,7 +10,7 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def show
-    user = User.find_by(email: params[:email])
+    user = User.find(params[:id])
     session[:user_id] = user.id
     render json: UserSerializer.new(user).serialize_user, status: :ok
   end

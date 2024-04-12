@@ -18,7 +18,7 @@ RSpec.describe "Current Session" do
         parsed = JSON.parse(response.body, symbolize_names: true)  
         user = parsed[:data]
 
-        get "/api/v1/logged_in"
+        get "/api/v1/logged_in/#{user[:id]}"
 
         expect(response).to be_successful
         parsed = JSON.parse(response.body, symbolize_names: true)

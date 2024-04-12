@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :upc_items, only: %i[index show]
+      resources :upc_items, only: %i[show]
       resources :users, only: %i[create show] do
         resources :allergens, only: %i[index create]
         patch "/allergens", to: "allergens#update"

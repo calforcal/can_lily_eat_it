@@ -5,7 +5,7 @@ RSpec.describe "Upc Items API" do
     describe "happy paths" do
       it "can get the information for a certain UPC code and given allergens" do
         allergens = "dairy,soy"
-        get api_v1_upc_items_path(upc: "014500021632", allergens: allergens)
+        get api_v1_upc_item_path(id: "null", upc: "014500021632", allergens: allergens)
 
         expect(response).to be_successful 
         parsed = JSON.parse(response.body, symbolize_names: true)
@@ -38,7 +38,7 @@ RSpec.describe "Upc Items API" do
 
       it "can get the information for a certain UPC code and USERS allergens" do
         post api_v1_sessions_path(email: "rooster@gmail.com", password: "buddy123")
-        get api_v1_upc_items_path(upc: "014500021632")
+        get api_v1_upc_item_path(id: User.find_by(email: "rooster@gmail.com").id, upc: "014500021632")
 
         expect(response).to be_successful 
         parsed = JSON.parse(response.body, symbolize_names: true)
@@ -73,7 +73,7 @@ RSpec.describe "Upc Items API" do
     describe "#sad paths" do
       it "can handle a bad UPC code request " do
         allergens = "dairy,soy"
-        get api_v1_upc_items_path(upc: "10987654321", allergens: allergens)
+        get api_v1_upc_item_path(id: "null", upc: "10987654321", allergens: allergens)
 
         expect(response).to be_successful
         expect(response.status).to eq(204)
