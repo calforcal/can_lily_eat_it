@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       end
       resources :sessions, only: %i[create]
 
-      get "/logged_in", to: "sessions#show"
+      get "/logged_in/:id", to: "sessions#show"
       delete "/logout", to: "sessions#destroy"
     end
   end
