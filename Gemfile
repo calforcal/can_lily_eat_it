@@ -42,6 +42,7 @@ group :development, :test do
   gem "faraday"
   gem "figaro"
   gem "pry"
+  gem 'rails_same_site_cookie'
   gem "rspec-rails"
   gem "shoulda-matchers"
   gem "simplecov"

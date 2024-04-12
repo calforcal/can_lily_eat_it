@@ -1,7 +1,7 @@
 class Api::V1::UpcItemsController < ApplicationController
-  def index
-    if current_user?
-      allergens = @current_user.get_user_allergens
+  def show
+    if params[:id] != "null"
+      allergens = User.find(params[:id]).get_user_allergens
     else
       merged_allergens = {}
       params[:allergens].split(",").each { |allergen| merged_allergens.merge!(Allergen.find_by(name: allergen).found_in) }
