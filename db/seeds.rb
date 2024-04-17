@@ -400,7 +400,9 @@ wheat_hash = {
 }
 
 UserAllergen.destroy_all
+UserFood.destroy_all
 Allergen.destroy_all
+Food.destroy_all
 User.destroy_all
 
 user = User.create(name: "mickey", email: "rooster@gmail.com", password: "buddy123", password_confirmation: "buddy123")
