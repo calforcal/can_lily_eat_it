@@ -18,8 +18,13 @@ RSpec.describe "POST User Food" do
             "lily_eat": false
         }
 
-        headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}
-        post api_v1_user_foods_path(user.id), headers: headers, params: JSON.generate(new_food_json)
+        post api_v1_sessions_path({ email: user.email, password: user.password })
+        expect(response).to be_successful 
+        parsed = JSON.parse(response.body, symbolize_names: true)
+        returned_user = parsed[:data]
+
+        headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json', 'Authorization': returned_user[:token]}
+        post api_v1_foods_path, headers: headers, params: JSON.generate(new_food_json)
 
         expect(response).to be_successful
         expect(response.status).to eq(201)
