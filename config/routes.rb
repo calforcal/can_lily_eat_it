@@ -6,15 +6,14 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :upc_items, only: %i[show]
-      resources :users, only: %i[create show] do
-        resources :allergens, only: %i[index create]
-        patch "/allergens", to: "allergens#update"
-        resources :foods, only: %i[index create destroy]
-      end
+      resources :upc_items, only: %i[index]
+      resources :allergens, only: %i[index create]
+      patch "/allergens", to: "allergens#update"
+      resources :users, only: %i[create show]
+      resources :foods, only: %i[index create destroy]
       resources :sessions, only: %i[create]
 
-      get "/logged_in/:id", to: "sessions#show"
+      get "/logged_in", to: "sessions#show"
       delete "/logout", to: "sessions#destroy"
     end
   end
