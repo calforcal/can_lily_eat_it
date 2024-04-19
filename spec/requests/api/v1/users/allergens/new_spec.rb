@@ -9,7 +9,13 @@ RSpec.describe "UserAllergens" do
 
       expect(user.allergens.count).to eq(0)
 
-      post api_v1_user_allergens_path(user.id, allergens: allergens)
+      post api_v1_sessions_path({ email: user.email, password: user.password })
+      expect(response).to be_successful 
+      parsed = JSON.parse(response.body, symbolize_names: true)
+      returned_user = parsed[:data]
+
+      headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json', 'Authorization': returned_user[:token]}
+      post api_v1_allergens_path(allergens: allergens), headers: headers
 
       expect(response).to be_successful
       expect(response.status).to eq(201)

@@ -8,7 +8,13 @@ RSpec.describe "Users Foods" do
         food_1 = user.foods.create!(name: "Bad Cereal", upc_code: "123456789", ingredients: ["Egg", "Soy", "Oats", "Milk"], allergens: ["Soy", "Milk"], lily_eat: false)
         food_2 = user.foods.create!(name: "Good Cereal", upc_code: "987654321", ingredients: ["Wheat", "Beans", "Oats", "Starch"], allergens: [], lily_eat: true)
 
-        get api_v1_user_foods_path(user.id)
+        post api_v1_sessions_path({ email: user.email, password: user.password })
+        expect(response).to be_successful 
+        parsed = JSON.parse(response.body, symbolize_names: true)
+        returned_user = parsed[:data]
+  
+        headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json', 'Authorization': returned_user[:token]}
+        get api_v1_foods_path, headers: headers
 
         expect(response).to be_successful
         parsed = JSON.parse(response.body, symbolize_names: true)

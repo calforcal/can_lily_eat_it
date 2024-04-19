@@ -23,6 +23,7 @@ RSpec.describe "#create_session" do
       user = parsed[:data]
 
       expect(user).to have_key(:id)
+      expect(user).to have_key(:token)
       expect(user).to have_key(:type)
       expect(user[:type]).to eq("user")
       expect(user).to have_key(:attributes)

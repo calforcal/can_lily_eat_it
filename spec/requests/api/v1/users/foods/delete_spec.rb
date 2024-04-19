@@ -10,7 +10,13 @@ RSpec.describe "DELETE User Food" do
 
         expect(user.foods.count).to eq(2)
 
-        delete api_v1_user_food_path(user.id, food_1.id)
+        post api_v1_sessions_path({ email: user.email, password: user.password })
+        expect(response).to be_successful 
+        parsed = JSON.parse(response.body, symbolize_names: true)
+        returned_user = parsed[:data]
+  
+        headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json', 'Authorization': returned_user[:token]}
+        delete api_v1_food_path(food_1.id), headers: headers
 
         expect(response).to be_successful
         expect(response.status).to eq(200)
