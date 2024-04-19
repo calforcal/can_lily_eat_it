@@ -1,14 +1,13 @@
 class Api::V1::AllergensController < ApplicationController
-  before_action :get_user
   def index
     render json: AllergenSerializer.new.serialize_user_allergens(@user.allergens)
   end
 
   def create
-    if @user.allergens.count == 0
+    if current_user.allergens.count == 0
       params[:allergens].split(",").each do |allergen|
         found_allergen = Allergen.find_by(name: allergen)
-        UserAllergen.create!(user_id: @user.id, allergen_id: found_allergen.id)
+        UserAllergen.create!(user_id: current_user.id, allergen_id: found_allergen.id)
       end
       code = 201
     else
@@ -41,21 +40,17 @@ class Api::V1::AllergensController < ApplicationController
     
     allergen_hash.to_a.each do |arr|
       found_allergen = Allergen.find_by(name: arr[0])
-      user_allergen = UserAllergen.find_by(user_id: @user.id, allergen_id: found_allergen.id)
+      user_allergen = UserAllergen.find_by(user_id: current_user.id, allergen_id: found_allergen.id)
 
       if arr[1] == true && user_allergen == nil
-        UserAllergen.create!(user_id: @user.id, allergen_id: found_allergen.id)
+        UserAllergen.create!(user_id: current_user.id, allergen_id: found_allergen.id)
       elsif arr[1] == false && user_allergen != nil
-        UserAllergen.find_by(user_id: @user.id, allergen_id: found_allergen.id).destroy
+        UserAllergen.find_by(user_id: current_user.id, allergen_id: found_allergen.id).destroy
       end
     end
   end
 
   private
-  def get_user
-    @user = User.find(params[:user_id])
-  end
-
   def allergen_params
     params.permit(:user_id, :allergen_id)
   end
