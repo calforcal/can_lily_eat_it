@@ -18,13 +18,14 @@ RSpec.describe "Current Session" do
         parsed = JSON.parse(response.body, symbolize_names: true)  
         user = parsed[:data]
 
-        get "/api/v1/logged_in/#{user[:id]}"
+        get "/api/v1/logged_in", headers: { "Content-Type": "application/json", Accept: "application/json", "Authorization": user[:token] }
 
         expect(response).to be_successful 
         parsed = JSON.parse(response.body, symbolize_names: true)  
         logged_in_user = parsed[:data]
 
         expect(logged_in_user).to have_key(:id)
+        expect(logged_in_user).to have_key(:token)
         expect(logged_in_user).to have_key(:type)
         expect(logged_in_user[:type]).to eq("user")
         expect(logged_in_user).to have_key(:attributes)
