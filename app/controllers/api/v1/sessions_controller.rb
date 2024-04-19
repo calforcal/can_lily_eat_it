@@ -1,22 +1,21 @@
 class Api::V1::SessionsController < ApplicationController
+  skip_before_action :authorized, only: [:create]
+
   def create
     user = User.find_by(email: params[:email])
-    if !user.nil? && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      render json: UserSerializer.new(user).serialize_user, status: :created
+    if user && user.authenticate(params[:password])
+      token = issue_token(user)
+      render json: UserSerializer.new(user, token).serialize_user, status: :created
     else
-      render json: { error: 'Invalid email or password' }, status: :unauthorized
+      render json: { error: 'Invalid credentials.' }, status: :unauthorized
     end
   end
 
   def show
-    user = User.find(params[:id])
-    session[:user_id] = user.id
-    render json: UserSerializer.new(user).serialize_user, status: :ok
-  end
-
-  def destroy
-    session.delete :user_id
-    render json: { message: "You have been successfully logged out." }
+    if logged_in?
+      render json: UserSerializer.new(current_user, request.authorization).serialize_user, status: :ok
+    else
+      render json: { message: "Please login to continue." }
+    end
   end
 end
