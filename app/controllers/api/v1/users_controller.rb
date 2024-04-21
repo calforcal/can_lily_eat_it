@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
       token = issue_token(user)
       render json: UserSerializer.new(user, token).serialize_user, status: :created
     else
-      render json: { messages: user.errors.messages }
+      render json: { messages: user.errors.messages }, status: :unprocessable_entity
     end
   end
 
