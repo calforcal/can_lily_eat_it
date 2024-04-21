@@ -1,6 +1,6 @@
 class Api::V1::AllergensController < ApplicationController
   def index
-    render json: AllergenSerializer.new.serialize_user_allergens(@user.allergens)
+    render json: AllergenSerializer.new.serialize_user_allergens(current_user.allergens)
   end
 
   def create
